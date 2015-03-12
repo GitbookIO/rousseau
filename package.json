@@ -1,0 +1,28 @@
+{
+    "name": "rousseau",
+    "version": "0.0.0",
+    "homepage": "https://github.com/GitbookIO/rousseau",
+    "description": "Lightweight proofreader",
+    "main": "lib/index.js",
+    "dependencies": {
+        "lodash": "^3.2.0"
+    },
+    "devDependencies": {
+        "mocha": "2.2.1"
+    },
+    "scripts": {
+        "test": "mocha --reporter list"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/GitbookIO/rousseau.git"
+    },
+    "keywords": [
+        "licenses"
+    ],
+    "author": "GitBook <contact@gitbook.com>",
+    "license": "Apache 2",
+    "bugs": {
+        "url": "https://github.com/GitbookIO/rousseau/issues"
+    }
+}
