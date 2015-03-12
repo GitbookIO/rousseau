@@ -25,6 +25,9 @@ rousseau('So the cat was stolen.', function(err, results) {
 
 ```js
 {
+    // Type of check that output this suggestion
+    type: "so",
+
     // Level of importance
     // "warn", "error"
     'level': "warn",
