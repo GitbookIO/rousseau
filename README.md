@@ -16,7 +16,7 @@ $ npm install rousseau
 ```js
 var rousseau = require("rousseau");
 
-rousseau.check('So the cat was stolen.', function(err, results) {
+rousseau('So the cat was stolen.', function(err, results) {
 
 });
 ```
