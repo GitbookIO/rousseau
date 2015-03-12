@@ -16,9 +16,7 @@ $ npm install rousseau
 ```js
 var rousseau = require("rousseau");
 
-rousseau('So the cat was stolen.', function(err, results) {
-
-});
+var results = rousseau('So the cat was stolen.');
 ```
 
 `results` is an array of object like:

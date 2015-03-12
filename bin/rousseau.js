@@ -30,36 +30,30 @@ if (!input) {
 var content = fs.readFileSync(input, { encoding: "utf-8" });
 
 
-rousseau(content, function(err, results) {
-    var levels = {};
-    var table = new Table({
-        chars: { 'top': '' , 'top-mid': '' , 'top-left': '' , 'top-right': ''
-         , 'bottom': '' , 'bottom-mid': '' , 'bottom-left': '' , 'bottom-right': ''
-         , 'left': '' , 'left-mid': '' , 'mid': '' , 'mid-mid': ''
-         , 'right': '' , 'right-mid': '' , 'middle': ' ' },
-        style: { 'padding-left': 0, 'padding-right': 0 }
+var results = rousseau(content);
+var levels = {};
+var table = new Table({
+    chars: { 'top': '' , 'top-mid': '' , 'top-left': '' , 'top-right': ''
+     , 'bottom': '' , 'bottom-mid': '' , 'bottom-left': '' , 'bottom-right': ''
+     , 'left': '' , 'left-mid': '' , 'mid': '' , 'mid-mid': ''
+     , 'right': '' , 'right-mid': '' , 'middle': ' ' },
+    style: { 'padding-left': 0, 'padding-right': 0 }
+});
+
+if (results.length > 0) {
+    console.log("Results for '"+color.wrap(input, "white", "underline")+"':");
+    console.log("");
+
+    _.each(results, function(result) {
+        var color = LEVELS[result.level];
+        levels[result.level] = (levels[result.level] || 0) + 1;
+
+        table.push(["  ", result.index+":"+result.offset, color("["+result.level+"]"), result.message]);
     });
 
-    if (err) {
-        console.log(color.red("Error: "+err.message));
-        process.exit(1);
-    }
-
-    if (results.length > 0) {
-        console.log("Results for '"+color.wrap(input, "white", "underline")+"':");
-        console.log("");
-
-        _.each(results, function(result) {
-            var color = LEVELS[result.level];
-            levels[result.level] = (levels[result.level] || 0) + 1;
-
-            table.push(["  ", result.index+":"+result.offset, color("["+result.level+"]"), result.message]);
-        });
-
-        console.log(table.toString());
-        console.log("");
-        console.log(color.cyan(results.length+" Problems ("+levels.error+" errors, "+levels.warn+" warnings)"));
-    } else {
-        console.log(COLOR_GREEN+"All good!"+COLOR_END)
-    }
-});
+    console.log(table.toString());
+    console.log("");
+    console.log(color.cyan(results.length+" Problems ("+levels.error+" errors, "+levels.warn+" warnings)"));
+} else {
+    console.log(COLOR_GREEN+"All good!"+COLOR_END)
+}
