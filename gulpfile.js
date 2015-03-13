@@ -3,6 +3,7 @@ var gulp = require('gulp')
 var browserify = require('gulp-browserify');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var inject = require('gulp-inject-string');
 var del = require('del');
 
 gulp.task('bundle', function() {
@@ -12,6 +13,7 @@ gulp.task('bundle', function() {
         insertGlobals : true,
         debug : false
     }))
+    .pipe(inject.wrap('(function () { var define = undefined; ', '; })();'))
     .pipe(rename('rousseau.js'))
     .pipe(gulp.dest('./dist'))
     .pipe(rename({ suffix: '.min' }))
