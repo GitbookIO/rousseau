@@ -56,6 +56,12 @@ describe("English", function() {
         it("should handle newline as boundaries", function() {
             var sentences = english.sentences()("This is my first sentence\nSecond");
             sentences.length.should.be.equal(2);
+
+            sentences[0].index.should.be.equal(0);
+            sentences[0].offset.should.be.equal(25);
+
+            sentences[1].index.should.be.equal(26);
+            sentences[1].offset.should.be.equal(6);
         });
     });
 
