@@ -63,6 +63,7 @@ You can disable any combination of the following by providing a key with value `
 | `adverbs` | Checks for adverbs that can weaken meaning: really, very, extremely, etc. |
 | `readibility` | Checks for readibility of sentences. |
 | `simplicity` | Checks for simpler expressions |
+| `weasel` | Checks for "weasel words." |
 
 ### Contributing
 
