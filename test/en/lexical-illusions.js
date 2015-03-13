@@ -1,6 +1,3 @@
-var should = require("should");
-var rousseau = require("../lib")
-
 describe("Lexical Illusions", function() {
     var results = rousseau("the the");
 

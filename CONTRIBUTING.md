@@ -17,10 +17,11 @@ of the content
 
 ## Add a new check
 
-1. Describe your check in the `README.md`
-2. Create a file named with the `ID` for the new check, example: `end-with-right.js`
-3. Include it in the `<language>/index.js`
-4. Use the `tokenizer` to return suggestions, example to signal sentences ending with "Right?":
+1. Describe your check in the `README.md`.
+2. Create a file named with the `ID` for the new check, example: `end-with-right.js`.
+3. Include it in the `<language>/index.js`.
+4. Add some unit tests corresponding to yoru check.
+5. Use the `tokenizer` to return suggestions, example to signal sentences ending with "Right?":
 
 ```js
 var tokenize = require("../tokenize");
@@ -42,5 +43,5 @@ module.exports = tokenize.flow(
 
 ## Add a new language
 
-1. Create a folder named with the [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code
-2. Add your language in the `lib/languages.js` file
+1. Create a folder named with the [ISO 639-1](http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) language code.
+2. Add your language in the `lib/languages.js` file.

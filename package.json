@@ -14,7 +14,7 @@
         "should": "5.2.0"
     },
     "scripts": {
-        "test": "mocha --reporter spec"
+        "test": "mocha --reporter spec --recursive"
     },
     "bin": {
         "rousseau": "./bin/rousseau.js"
