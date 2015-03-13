@@ -28,7 +28,7 @@ var results = rousseau('So the cat was stolen.');
     type: "so",
 
     // Level of importance
-    // "warn", "error"
+    // "suggestion", "warn", "error"
     level: "warn",
 
     // Index in the text
