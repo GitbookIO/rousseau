@@ -11,7 +11,6 @@ describe("English", function() {
             var sentences = english.sentences()("First. Second.");
             _.pluck(sentences, "value").should.be.eql(["First.", "Second."]);
 
-            console.log(sentences);
             sentences[0].index.should.be.equal(0);
             sentences[0].offset.should.be.equal(6);
 
