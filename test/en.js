@@ -95,6 +95,8 @@ describe("English", function() {
             it("should detect", function() {
                 results.should.have.length(1);
                 results[0].type.should.be.exactly("passive");
+                results[0].index.should.be.exactly(3);
+                results[0].offset.should.be.exactly(10);
             });
         });
 
