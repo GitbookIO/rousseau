@@ -65,6 +65,32 @@ You can disable any combination of the following by providing a key with value `
 | `simplicity` | Checks for simpler expressions |
 | `weasel` | Checks for "weasel words." |
 
+### Spellchecking
+
+Spellchecking is disabled by default and need to be configured with a specific dictionary.
+
+Dictionary can ge generated from hunspell files (`.aff` and `.dic`) using [hunspell-spellchecker](https://github.com/GitbookIO/hunspell-spellchecker).
+
+```js
+var results = rousseau("Intrduction", {
+    checks: {
+        spelling: {
+            dictionary: JSON.parse(fs.readFileSync("./en.json")
+        }
+    }
+});
+```
+
+### Cache
+
+Rousseau use an internal cache for certain operations (tokenization, spellchecking, ...); this cache can be configured using the option `cache`:
+
+```
+var results = rousseau('So the cat was stolen.', {
+    cache: 100 // A maximum of 100 elements will be stored in the memory cache
+});
+```
+
 ### Contributing
 
 We'd love to accept your patches and contributions to improve Rousseau (supported languages, checks, ...). Learn more about how to contribute in [CONTRIBUTING.md](./CONTRIBUTING.md).

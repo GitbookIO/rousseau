@@ -7,7 +7,8 @@
     "dependencies": {
         "lodash": "^3.2.0",
         "bash-color": "0.0.3",
-        "cli-table": "0.3.1"
+        "cli-table": "0.3.1",
+        "hunspell-spellchecker": "1.0.0"
     },
     "devDependencies": {
         "mocha": "2.2.1",
