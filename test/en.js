@@ -130,10 +130,10 @@ describe("English", function() {
             results.should.have.length(2);
 
             results[0].type.should.be.exactly("readibility");
-            results[0].level.should.be.exactly("warn");
+            results[0].level.should.be.exactly("suggestion");
 
             results[1].type.should.be.exactly("readibility");
-            results[1].level.should.be.exactly("error");
+            results[1].level.should.be.exactly("warn");
         });
     });
 
