@@ -4,6 +4,18 @@ var should = require("should");
 var rousseau = require("../lib");
 var english = require("../lib/en/english");
 
+function testRousseau(text, opts, done, fn) {
+    rousseau(text, opts || {}, function(err, results) {
+        if (err) return done(err);
+        try {
+            fn(results);
+            done();
+        } catch(err) {
+            done(err);
+        }
+    });
+}
+
 
 describe("English", function() {
     describe("Sentences Tokeniser", function() {
@@ -66,56 +78,65 @@ describe("English", function() {
     });
 
     describe("Adverbs", function() {
-        var results = rousseau("Allegedly, this sentence is terrible.");
-
-        it("should detect", function() {
-            results.should.have.length(1);
-            results[0].type.should.be.exactly("adverbs");
+        it("should detect", function(done) {
+            testRousseau("Allegedly, this sentence is terrible.", {
+                only: ["adverbs"]
+            }, done, function(results) {
+                results.should.have.length(1);
+                results[0].type.should.be.exactly("adverbs");
+            });
         });
     });
 
     describe("Lexical Illusions", function() {
-        it("should detect", function() {
-            var results = rousseau("the the", { only: ["lexical-illusion"] });
-            results.should.have.length(1);
-            results[0].type.should.be.exactly("lexical-illusion");
-            results[0].index.should.be.exactly(4);
+        it("should detect", function(done) {
+            testRousseau("the the", {
+                only: ["lexical-illusion"]
+            }, done, function(results) {
+                results.should.have.length(1);
+                results[0].type.should.be.exactly("lexical-illusion");
+                results[0].index.should.be.exactly(4);
+            });
         });
 
-        it("should split correctly sentences", function() {
-            var results = rousseau("offer to sell, sell", { only: ["lexical-illusion"] });
-            results.should.have.length(0);
+        it("should split correctly sentences", function(done) {
+            testRousseau("offer to sell, sell", {
+                only: ["lexical-illusion"]
+            }, done, function(results) {
+                results.should.have.length(0);
+            });
         });
     });
 
     describe("Passive", function() {
-        describe("-ed", function() {
-            var results = rousseau("He was judged.");
-
-            it("should detect", function() {
-                results.should.have.length(1);
-                results[0].type.should.be.exactly("passive");
-                results[0].index.should.be.exactly(3);
-                results[0].offset.should.be.exactly(10);
+        describe("-ed", function(done) {
+            it("should detect", function(done) {
+                testRousseau("He was judged.", {
+                    only: ["passive"]
+                }, done, function(results) {
+                    results.should.have.length(1);
+                    results[0].type.should.be.exactly("passive");
+                    results[0].index.should.be.exactly(3);
+                    results[0].offset.should.be.exactly(10);
+                });
             });
         });
 
         describe("predefined", function() {
-            var results = rousseau("He was bitten.");
-
-            it("should detect", function() {
-                results.should.have.length(1);
-                results[0].type.should.be.exactly("passive");
-            });
-
-            it("should suggest replacements", function() {
-                results[0].replacements.length.should.be.exactly(1);
+            it("should detect and suggest replacements", function(done) {
+                testRousseau("He was bitten.", {
+                    only: ["passive"]
+                }, done, function(results) {
+                    results.should.have.length(1);
+                    results[0].type.should.be.exactly("passive");
+                    results[0].replacements.length.should.be.exactly(1);
+                });
             });
         });
     });
 
     describe("Readibility", function() {
-        var results = rousseau(
+        var TEXT =
             // Hard to read
             "Rousseau highlights long, complex sentences and common errors;"
             + " if you see a warning highlight, shorten the sentence or split it."
@@ -123,67 +144,79 @@ describe("English", function() {
             // Very hard to read
             + "If you see an error highlight, your sentence is so dense and complicated that your readers"
             + " will get lost trying to follow its meandering, splitting logic —"
-            + " try editing this sentence to remove the error."
-        );
+            + " try editing this sentence to remove the error.";
 
-        it("should detect", function() {
-            results.should.have.length(2);
+        it("should detect", function(done) {
+            testRousseau(TEXT, {
+                only: ["readibility"]
+            }, done, function(results) {
+                results.should.have.length(2);
 
-            results[0].type.should.be.exactly("readibility");
-            results[0].level.should.be.exactly("suggestion");
+                results[0].type.should.be.exactly("readibility");
+                results[0].level.should.be.exactly("suggestion");
 
-            results[1].type.should.be.exactly("readibility");
-            results[1].level.should.be.exactly("warning");
+                results[1].type.should.be.exactly("readibility");
+                results[1].level.should.be.exactly("warning");
+            });
         });
     });
 
     describe("Simplicity", function() {
-        var results = rousseau("Acquire more stars");
-
-        it("should detect", function() {
-            results.should.have.length(1);
-            results[0].type.should.be.exactly("simplicity");
-        });
-
-        it("should give a suggestion", function() {
-            results[0].replacements.length.should.be.exactly(1);
+        it("should detect and suggest replacement", function(done) {
+            testRousseau("Acquire more stars", {
+                only: ["simplicity"]
+            }, done, function(results) {
+                results.should.have.length(1);
+                results[0].type.should.be.exactly("simplicity");
+                results[0].replacements.length.should.be.exactly(1);
+            });
         });
     });
 
     describe("So", function() {
-        var results = rousseau("So the cat was stole.");
-
-        it("should detect", function() {
-            results.should.have.length(1);
-            results[0].type.should.be.exactly("so");
+        it("should detect", function(done) {
+            testRousseau("So the cat was stole.", {
+                only: ["so"]
+            }, done, function(results) {
+                results.should.have.length(1);
+                results[0].type.should.be.exactly("so");
+            });
         });
     });
 
     describe("Weasel", function() {
         describe("List", function() {
-            var results = rousseau("Remarkably few developers write well.", { only: ["weasel"] });
+            it("should detect", function(done) {
+                testRousseau("Remarkably few developers write well.", {
+                    only: ["weasel"]
+                }, done, function(results) {
+                    results.should.have.length(2);
+                    results[0].type.should.be.exactly("weasel");
+                    results[0].index.should.be.exactly(0);
+                    results[0].offset.should.be.exactly(10);
 
-            it("should detect", function() {
-                results.should.have.length(2);
-                results[0].type.should.be.exactly("weasel");
-                results[0].index.should.be.exactly(0);
-                results[0].offset.should.be.exactly(10);
-
-                results[1].type.should.be.exactly("weasel");
-                results[1].index.should.be.exactly(11);
-                results[1].offset.should.be.exactly(3);
+                    results[1].type.should.be.exactly("weasel");
+                    results[1].index.should.be.exactly(11);
+                    results[1].offset.should.be.exactly(3);
+                });
             });
         });
 
         describe("Exceptions", function() {
-            it("should not detect 'too many'", function() {
-                var results = rousseau("I have too many things.", { only: ["weasel"] });
-                results.should.have.length(0);
+            it("should not detect 'too many'", function(done) {
+                testRousseau("I have too many things.", {
+                    only: ["weasel"]
+                }, done, function(results) {
+                    results.should.have.length(0);
+                });
             });
 
-            it("should not detect 'too few'", function() {
-                var results = rousseau("I have too few things.", { only: ["weasel"] });
-                results.should.have.length(0);
+            it("should not detect 'too few'", function(done) {
+                testRousseau("I have too few things.", {
+                    only: ["weasel"]
+                }, done, function(results) {
+                    results.should.have.length(0);
+                });
             });
         });
     });

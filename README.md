@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/GitbookIO/rousseau.png?branch=master)](https://travis-ci.org/GitbookIO/rousseau)
 [![NPM version](https://badge.fury.io/js/rousseau.svg)](http://badge.fury.io/js/rousseau)
 
-Rousseau is a lightweight proofreader written in Javascript, it can be used in Node.JS, in the command line and in the browser. It has been build to be integrated into the [GitBook Editor](https://www.gitbook.com).
+Rousseau is a proofreader written in Javascript, it can be used in Node.JS, in the command line and in the browser.
 
 ### Installation
 
@@ -65,21 +65,6 @@ You can disable any combination of the following by providing a key with value `
 | `simplicity` | Checks for simpler expressions |
 | `weasel` | Checks for "weasel words." |
 
-### Spellchecking
-
-Spellchecking is disabled by default and need to be configured with a specific dictionary.
-
-Dictionary can ge generated from hunspell files (`.aff` and `.dic`) using [hunspell-spellchecker](https://github.com/GitbookIO/hunspell-spellchecker).
-
-```js
-var results = rousseau("Intrduction", {
-    checks: {
-        spelling: {
-            dictionary: JSON.parse(fs.readFileSync("./en.json")
-        }
-    }
-});
-```
 
 ### Cache
 
