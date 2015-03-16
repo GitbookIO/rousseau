@@ -24,9 +24,10 @@ of the content
 5. Use the `tokenizer` to return suggestions, example to signal sentences ending with "Right?":
 
 ```js
+var levels = require("../levels");
 var tokenize = require("../tokenize");
 
-module.exports = tokenize.flow(
+module.exports = tokenize.check(
     // Tokenize as sentences
     tokenize.sentences(),
 
@@ -35,7 +36,7 @@ module.exports = tokenize.flow(
 
     // Output
     tokenize.define({
-        level: "warn",
+        level: levels.WARNING,
         message: "omit 'right?' at the end of sentences"
     })
 );

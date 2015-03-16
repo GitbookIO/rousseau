@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/GitbookIO/rousseau.png?branch=master)](https://travis-ci.org/GitbookIO/rousseau)
 [![NPM version](https://badge.fury.io/js/rousseau.svg)](http://badge.fury.io/js/rousseau)
 
-Rousseau is a proofreader written in Javascript, it can be used in Node.JS, in the command line and in the browser.
+Rousseau is a lightweight proofreader written in Javascript, it can be used in Node.JS, in the command line and in the browser.
 
 ### Installation
 
@@ -30,8 +30,8 @@ rousseau('So the cat was stolen.', function(err, results) {
     type: "so",
 
     // Level of importance
-    // "suggestion", "warn", "error"
-    level: "warn",
+    // "suggestion", "warning", "error"
+    level: "warning",
 
     // Index in the text
     index: 10,
@@ -70,7 +70,7 @@ You can disable any combination of the following by providing a key with value `
 
 ### Extend Rousseau
 
-Example: Extend rousseau with a Spellcheck.
+Example: Extend rousseau with a Spellchecker.
 
 ```js
 rousseau("Some text", {
