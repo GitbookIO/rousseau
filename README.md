@@ -17,7 +17,9 @@ $ npm install rousseau
 ```js
 var rousseau = require("rousseau");
 
-var results = rousseau('So the cat was stolen.');
+rousseau('So the cat was stolen.', function(err, results) {
+    ...
+});
 ```
 
 `results` is an array of object like:
@@ -65,6 +67,30 @@ You can disable any combination of the following by providing a key with value `
 | `simplicity` | Checks for simpler expressions |
 | `weasel` | Checks for "weasel words." |
 
+
+### Extend Rousseau
+
+Example: Extend rousseau with a Spellcheck.
+
+```js
+rousseau("Some text", {
+    checks: {
+        spelling: rousseau.tokenize.check([
+            rousseau.tokenize.words(),
+            rousseau.filter(function(word) {
+                return wordIsValid(word);
+            }),
+            rousseau.define({
+                level: rousseau.levels.ERROR,
+                message: "Spelling error"
+            })
+        ])
+    }
+}, function(err, results) {
+    ...
+})
+
+```
 
 ### Cache
 
