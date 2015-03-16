@@ -133,7 +133,7 @@ describe("English", function() {
             results[0].level.should.be.exactly("suggestion");
 
             results[1].type.should.be.exactly("readibility");
-            results[1].level.should.be.exactly("warn");
+            results[1].level.should.be.exactly("warning");
         });
     });
 
