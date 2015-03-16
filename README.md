@@ -97,8 +97,10 @@ rousseau("Some text", {
 Rousseau use an internal cache for certain operations (tokenization, spellchecking, ...); this cache can be configured using the option `cache`:
 
 ```js
-var results = rousseau('So the cat was stolen.', {
+rousseau('So the cat was stolen.', {
     cache: 100 // A maximum of 100 elements will be stored in the memory cache
+}, function(err, results) {
+    ...
 });
 ```
 
