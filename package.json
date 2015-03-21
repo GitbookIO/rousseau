@@ -1,6 +1,6 @@
 {
     "name": "rousseau",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "homepage": "https://github.com/GitbookIO/rousseau",
     "description": "Lightweight proofreader",
     "main": "lib/index.js",
@@ -35,7 +35,7 @@
         "url": "https://github.com/GitbookIO/rousseau.git"
     },
     "keywords": [
-        "licenses"
+        "proofreading", "language", "native", "spellcheck"
     ],
     "author": "GitBook <contact@gitbook.com>",
     "license": "Apache 2",
