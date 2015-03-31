@@ -65,6 +65,6 @@ rousseau(content, function(err, results) {
         console.log("");
         console.log(color.cyan(results.length+" Problems ("+(levels.error || 0)+" errors, "+(levels.warning || 0)+" warnings)"));
     } else {
-        console.log(COLOR_GREEN+"All good!"+COLOR_END)
+        console.log(color.green("All good!"))
     }
 });
