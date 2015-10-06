@@ -4,18 +4,7 @@ var should = require("should");
 var rousseau = require("../lib");
 var english = require("../lib/en/english");
 
-function testRousseau(text, opts, done, fn) {
-    rousseau(text, opts || {}, function(err, results) {
-        if (err) return done(err);
-        try {
-            fn(results);
-            done();
-        } catch(err) {
-            done(err);
-        }
-    });
-}
-
+var testRousseau = require('./helper').testRousseau;
 
 describe("English", function() {
     describe("Sentences Tokeniser", function() {

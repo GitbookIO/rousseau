@@ -1,7 +1,9 @@
 var should = require("should");
 var html = require("../lib/utils/html");
 
-describe("HTML Tokenizer", function() {
+var testRousseau = require('./helper').testRousseau;
+
+describe("Markup Proofreading", function() {
     it("should correctly tokenize html", function() {
         var tokens = html.tokenize('<b>hello</b> world');
         tokens.length.should.equal(2);
