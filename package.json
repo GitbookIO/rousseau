@@ -9,11 +9,12 @@
         "bash-color": "0.0.3",
         "cli-table": "0.3.1",
         "crc": "3.2.1",
-        "simple-lru-cache": "0.0.1"
+        "simple-lru-cache": "0.0.1",
+        "htmlparser2": "3.8.3"
     },
     "devDependencies": {
-        "mocha": "2.2.1",
-        "should": "5.2.0",
+        "mocha": "2.3.3",
+        "should": "7.1.0",
         "gulp": "3.8.11",
         "gulp-browserify": "0.5.1",
         "gulp-uglify": "1.1.0",

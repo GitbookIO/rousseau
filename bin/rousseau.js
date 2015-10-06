@@ -8,6 +8,7 @@ var fs = require('fs');
 var path = require('path');
 
 var rousseau = require('../lib');
+var html = require('../lib/utils/html');
 
 // Colors for levels
 var LEVELS = {
@@ -17,6 +18,15 @@ var LEVELS = {
     suggestion: color.cyan
 };
 
+// Parse input file
+function parseFile(input) {
+    var content = fs.readFileSync(input, { encoding: "utf-8" });
+    var ext = path.extname(input);
+
+    if (ext == '.html') return html.tokenize(content);
+
+    return content;
+}
 
 // By default read input stream
 var input = process.argv[2];
@@ -29,7 +39,7 @@ if (!input) {
 }
 
 // Read and lint file
-var content = fs.readFileSync(input, { encoding: "utf-8" });
+var content = parseFile(input);
 
 rousseau(content, function(err, results) {
     if (err) {
