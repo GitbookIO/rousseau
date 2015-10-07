@@ -93,11 +93,12 @@ describe("English", function() {
         describe('Start', function() {
             it("should detect sentences not starting with a space", function(done) {
                 testRousseau("Hello Barney.The bird in the word./nThis is after a new line.", {
-                    only: ["sentences:start"]
+                    only: ["sentence:start"]
                 }, done, function(results) {
                     results.should.have.length(1);
                     results[0].index.should.be.exactly(13);
-                    results[0].type.should.be.exactly("sentences:start");
+                    results[0].offset.should.be.exactly(1);
+                    results[0].type.should.be.exactly("sentence:start");
                 });
             });
         });
@@ -105,11 +106,12 @@ describe("English", function() {
         describe('End', function() {
             it("should detect sentences not ending with a space before punctuation", function(done) {
                 testRousseau("Hello Barney. The bird in the word .", {
-                    only: ["sentences:end"]
+                    only: ["sentence:end"]
                 }, done, function(results) {
                     results.should.have.length(1);
-                    results[0].index.should.be.exactly(13);
-                    results[0].type.should.be.exactly("sentences:end");
+                    results[0].index.should.be.exactly(34);
+                    results[0].offset.should.be.exactly(1);
+                    results[0].type.should.be.exactly("sentence:end");
                 });
             });
         });
