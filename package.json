@@ -16,19 +16,10 @@
     },
     "devDependencies": {
         "mocha": "2.3.3",
-        "should": "7.1.0",
-        "gulp": "3.8.11",
-        "gulp-browserify": "0.5.1",
-        "gulp-uglify": "1.1.0",
-        "gulp-inject-string": "0.0.2",
-        "del": "1.1.1",
-        "gulp-rename": "1.2.0",
-        "benchmark": "1.0.0",
-        "beautify-benchmark": "0.2.4"
+        "should": "7.1.0"
     },
     "scripts": {
-        "test": "mocha --reporter spec --recursive --bail",
-        "prepublish": "gulp"
+        "test": "mocha --reporter spec --recursive --bail"
     },
     "bin": {
         "rousseau": "./bin/rousseau.js"
