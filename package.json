@@ -10,7 +10,9 @@
         "cli-table": "0.3.1",
         "crc": "3.2.1",
         "simple-lru-cache": "0.0.1",
-        "htmlparser2": "3.8.3"
+        "tokenize-text": "1.1.0",
+        "tokenize-english": "1.0.0",
+        "tokenize-htmltext": "1.0.0"
     },
     "devDependencies": {
         "mocha": "2.3.3",

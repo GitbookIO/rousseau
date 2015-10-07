@@ -8,7 +8,7 @@ var fs = require('fs');
 var path = require('path');
 
 var rousseau = require('../lib');
-var html = require('../lib/utils/html');
+var tokenizeHTML = require('tokenize-html');
 
 // Colors for levels
 var LEVELS = {
@@ -23,7 +23,7 @@ function parseFile(input) {
     var content = fs.readFileSync(input, { encoding: "utf-8" });
     var ext = path.extname(input);
 
-    if (ext == '.html') return html.tokenize(content);
+    if (ext == '.html') return tokenizeHTML(content);
 
     return content;
 }
