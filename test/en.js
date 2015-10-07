@@ -108,7 +108,7 @@ describe("English", function() {
                     only: ["sentences:end"]
                 }, done, function(results) {
                     results.should.have.length(1);
-                    results[0].index.should.be.exactly(14);
+                    results[0].index.should.be.exactly(13);
                     results[0].type.should.be.exactly("sentences:end");
                 });
             });
