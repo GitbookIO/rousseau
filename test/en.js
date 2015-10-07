@@ -89,6 +89,32 @@ describe("English", function() {
         });
     });
 
+    describe("Sentences", function() {
+        describe('Start', function() {
+            it("should detect sentences not starting with a space", function(done) {
+                testRousseau("Hello Barney.The bird in the word./nThis is after a new line.", {
+                    only: ["sentences:start"]
+                }, done, function(results) {
+                    results.should.have.length(1);
+                    results[0].index.should.be.exactly(13);
+                    results[0].type.should.be.exactly("sentences:start");
+                });
+            });
+        });
+
+        describe('End', function() {
+            it("should detect sentences not ending with a space before punctuation", function(done) {
+                testRousseau("Hello Barney. The bird in the word .", {
+                    only: ["sentences:end"]
+                }, done, function(results) {
+                    results.should.have.length(1);
+                    results[0].index.should.be.exactly(14);
+                    results[0].type.should.be.exactly("sentences:end");
+                });
+            });
+        });
+    });
+
     describe("Simplicity", function() {
         it("should detect and suggest replacement", function(done) {
             testRousseau("Acquire more stars", {
