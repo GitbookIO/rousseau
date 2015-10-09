@@ -114,6 +114,14 @@ describe("English", function() {
                     results[0].type.should.be.exactly("sentence:end");
                 });
             });
+
+            it("should not signal this error if punctation is not a dot", function(done) {
+                testRousseau("The bird in the word !", {
+                    only: ["sentence:end"]
+                }, done, function(results) {
+                    results.should.have.length(0);
+                });
+            });
         });
     });
 
