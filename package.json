@@ -9,23 +9,18 @@
         "bash-color": "0.0.3",
         "cli-table": "0.3.1",
         "crc": "3.2.1",
-        "simple-lru-cache": "0.0.1"
+        "simple-lru-cache": "0.0.1",
+        "tokenize-text": "1.1.0",
+        "tokenize-english": "1.0.2",
+        "tokenize-htmltext": "1.0.0",
+        "find-line-column": "0.5.2"
     },
     "devDependencies": {
-        "mocha": "2.2.1",
-        "should": "5.2.0",
-        "gulp": "3.8.11",
-        "gulp-browserify": "0.5.1",
-        "gulp-uglify": "1.1.0",
-        "gulp-inject-string": "0.0.2",
-        "del": "1.1.1",
-        "gulp-rename": "1.2.0",
-        "benchmark": "1.0.0",
-        "beautify-benchmark": "0.2.4"
+        "mocha": "2.3.3",
+        "should": "7.1.0"
     },
     "scripts": {
-        "test": "mocha --reporter spec --recursive --bail",
-        "prepublish": "gulp"
+        "test": "mocha --reporter spec --recursive --bail"
     },
     "bin": {
         "rousseau": "./bin/rousseau.js"

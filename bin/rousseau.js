@@ -3,11 +3,13 @@
 var _ = require('lodash');
 var color = require('bash-color');
 var Table = require('cli-table');
+var findLineColumn = require('find-line-column');
 
 var fs = require('fs');
 var path = require('path');
 
 var rousseau = require('../lib');
+var tokenizeHTML = require('tokenize-htmltext');
 
 // Colors for levels
 var LEVELS = {
@@ -17,9 +19,21 @@ var LEVELS = {
     suggestion: color.cyan
 };
 
-
 // By default read input stream
 var input = process.argv[2];
+
+// Original file content
+var fileContent = "";
+
+// Parse input file
+function parseFile(input) {
+    fileContent = fs.readFileSync(input, { encoding: "utf-8" });
+    var ext = path.extname(input);
+
+    if (ext == '.html') return tokenizeHTML(fileContent);
+
+    return fileContent;
+}
 
 if (!input) {
     console.log("Need at least one argument, ex: rousseau ./my.txt");
@@ -29,7 +43,7 @@ if (!input) {
 }
 
 // Read and lint file
-var content = fs.readFileSync(input, { encoding: "utf-8" });
+var content = parseFile(input);
 
 rousseau(content, function(err, results) {
     if (err) {
@@ -52,10 +66,14 @@ rousseau(content, function(err, results) {
 
         _.each(results, function(result) {
             var color = LEVELS[result.level];
+            var startPos = findLineColumn(fileContent, result.index);
+            var endPos = findLineColumn(fileContent, result.index + result.offset);
+
             levels[result.level] = (levels[result.level] || 0) + 1;
 
             table.push([
-                    "  ", result.index+":"+result.offset,
+                    "  ", startPos.line+":"+startPos.col,
+                    endPos.line+":"+endPos.col,
                     color("["+result.level+"]"),
                     result.message
             ]);

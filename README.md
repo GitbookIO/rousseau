@@ -66,6 +66,9 @@ You can disable any combination of the following by providing a key with value `
 | `readibility` | Checks for readibility of sentences. |
 | `simplicity` | Checks for simpler expressions |
 | `weasel` | Checks for "weasel words." |
+| `sentence:start` | Checks that sentence is preceded by a space |
+| `sentence:end` | Checks that there is no space between a sentence and its ending punctuation |
+| `sentence:uppercase` | Checks that sentences are starting with uppercase letter |
 
 
 ### Extend Rousseau

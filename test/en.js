@@ -2,81 +2,9 @@ var _ = require("lodash");
 var should = require("should");
 
 var rousseau = require("../lib");
-var english = require("../lib/en/english");
-
-function testRousseau(text, opts, done, fn) {
-    rousseau(text, opts || {}, function(err, results) {
-        if (err) return done(err);
-        try {
-            fn(results);
-            done();
-        } catch(err) {
-            done(err);
-        }
-    });
-}
-
+var testRousseau = require('./helper').testRousseau;
 
 describe("English", function() {
-    describe("Sentences Tokeniser", function() {
-        it("should split correctly", function() {
-            var sentences = english.sentences()("First. Second.");
-            _.pluck(sentences, "value").should.be.eql(["First.", "Second."]);
-
-            sentences[0].index.should.be.equal(0);
-            sentences[0].offset.should.be.equal(6);
-
-            sentences[1].index.should.be.equal(7);
-            sentences[1].offset.should.be.equal(7);
-        });
-
-        it("should handle urls", function() {
-            var sentences = english.sentences()("Google is accessible at https://www.google.fr.");
-            sentences.length.should.be.equal(1);
-        });
-
-        it("should handle abbreviation (1)", function() {
-            var sentences = english.sentences()("On Jan. 20, former Sen. Barack Obama became the 44th President of the U.S. Millions attended the Inauguration.");
-            sentences.length.should.be.equal(2);
-        });
-
-        it("should handle abbreviation (2)", function() {
-            var sentences = english.sentences()("Sen. Barack Obama became the 44th President of the US. Millions attended.");
-            sentences.length.should.be.equal(2);
-        });
-
-        it("should handle abbreviation (3)", function() {
-            var sentences = english.sentences()("Barack Obama, previously Sen. of lorem ipsum, became the 44th President of the U.S. Millions attended.");
-            sentences.length.should.be.equal(2);
-        });
-
-        it("should handle dot in middle of word if followed by capital letter", function() {
-            var sentences = english.sentences()("Hello Barney.The bird in the word.");
-            sentences.length.should.be.equal(2);
-        });
-
-        it("should handle question- and exlamation mark", function() {
-            var sentences = english.sentences()("Hello this is my first sentence? There is also a second! A third");
-            sentences.length.should.be.equal(3);
-        });
-
-        it("should handle emails", function() {
-            var sentences = english.sentences()("send me an email: gg@gggg.kk");
-            sentences.length.should.be.equal(1);
-        });
-
-        it("should handle newline as boundaries", function() {
-            var sentences = english.sentences()("This is my first sentence\nSecond");
-            sentences.length.should.be.equal(2);
-
-            sentences[0].index.should.be.equal(0);
-            sentences[0].offset.should.be.equal(25);
-
-            sentences[1].index.should.be.equal(26);
-            sentences[1].offset.should.be.equal(6);
-        });
-    });
-
     describe("Adverbs", function() {
         it("should detect", function(done) {
             testRousseau("Allegedly, this sentence is terrible.", {
@@ -157,6 +85,55 @@ describe("English", function() {
 
                 results[1].type.should.be.exactly("readibility");
                 results[1].level.should.be.exactly("warning");
+            });
+        });
+    });
+
+    describe("Sentences", function() {
+        describe('Start', function() {
+            it("should detect sentences not starting with a space", function(done) {
+                testRousseau("Hello Barney.The bird in the word./nThis is after a new line.", {
+                    only: ["sentence:start"]
+                }, done, function(results) {
+                    results.should.have.length(1);
+                    results[0].index.should.be.exactly(13);
+                    results[0].offset.should.be.exactly(1);
+                    results[0].type.should.be.exactly("sentence:start");
+                });
+            });
+        });
+
+        describe('End', function() {
+            it("should detect sentences not ending with a space before punctuation", function(done) {
+                testRousseau("Hello Barney. The bird in the word .", {
+                    only: ["sentence:end"]
+                }, done, function(results) {
+                    results.should.have.length(1);
+                    results[0].index.should.be.exactly(34);
+                    results[0].offset.should.be.exactly(1);
+                    results[0].type.should.be.exactly("sentence:end");
+                });
+            });
+
+            it("should not signal this error if punctation is not a dot", function(done) {
+                testRousseau("The bird in the word !", {
+                    only: ["sentence:end"]
+                }, done, function(results) {
+                    results.should.have.length(0);
+                });
+            });
+        });
+
+        describe('Uppercase', function() {
+            it("should detect sentences not starting with a uppercase", function(done) {
+                testRousseau("hello Barney. The bird in the word !", {
+                    only: ["sentence:uppercase"]
+                }, done, function(results) {
+                    results.should.have.length(1);
+                    results[0].index.should.be.exactly(0);
+                    results[0].offset.should.be.exactly(1);
+                    results[0].type.should.be.exactly("sentence:uppercase");
+                });
             });
         });
     });
