@@ -123,6 +123,19 @@ describe("English", function() {
                 });
             });
         });
+
+        describe('Uppercase', function() {
+            it("should detect sentences not starting with a uppercase", function(done) {
+                testRousseau("hello Barney. The bird in the word !", {
+                    only: ["sentence:uppercase"]
+                }, done, function(results) {
+                    results.should.have.length(1);
+                    results[0].index.should.be.exactly(0);
+                    results[0].offset.should.be.exactly(1);
+                    results[0].type.should.be.exactly("sentence:uppercase");
+                });
+            });
+        });
     });
 
     describe("Simplicity", function() {
