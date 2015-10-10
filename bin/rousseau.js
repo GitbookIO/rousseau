@@ -73,6 +73,7 @@ rousseau(content, function(err, results) {
 
             table.push([
                     "  ", startPos.line+":"+startPos.col,
+                    endPos.line+":"+endPos.col,
                     color("["+result.level+"]"),
                     result.message
             ]);
