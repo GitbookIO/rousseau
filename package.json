@@ -1,6 +1,6 @@
 {
     "name": "rousseau",
-    "version": "0.0.3",
+    "version": "1.0.0",
     "homepage": "https://github.com/GitbookIO/rousseau",
     "description": "Lightweight proofreader",
     "main": "lib/index.js",
