@@ -87,6 +87,29 @@ describe("English", function() {
                 results[1].level.should.be.exactly("warning");
             });
         });
+
+        it("should detect for splitted sentences", function(done) {
+            var tokens = [
+                {
+                    value: "When an x86-based computer is turned on, it begins a complex path to get to the stage where control is transferred to our kernel's \"main\" routine (",
+                    index: 62,
+                    offset: 147
+                },
+                {
+                    value: "). For this course, we are only going to consider the BIOS boot method and not it's successor (UEFI).",
+                    index: 218,
+                    offset: 101
+                }
+            ];
+
+            testRousseau(tokens, {
+                only: ["readibility"]
+            }, done, function(results) {
+                results[0].type.should.be.exactly("readibility");
+                results[0].index.should.equal(62);
+                results[0].offset.should.equal(158);
+            });
+        })
     });
 
     describe("Sentences", function() {
