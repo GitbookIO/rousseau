@@ -154,8 +154,23 @@ describe("English", function() {
                 }, done, function(results) {
                     results.should.have.length(1);
                     results[0].index.should.be.exactly(0);
-                    results[0].offset.should.be.exactly(1);
+                    results[0].offset.should.be.exactly(5);
                     results[0].type.should.be.exactly("sentence:uppercase");
+                    results[0].replacements.length.should.be.exactly(1);
+                    results[0].replacements[0].value.should.be.exactly('Hello');
+                });
+            });
+
+            it("should detect sentences not starting with a uppercase (startign with spaces)", function(done) {
+                testRousseau("Hello Barney! the bird in the word !", {
+                    only: ["sentence:uppercase"]
+                }, done, function(results) {
+                    results.should.have.length(1);
+                    results[0].index.should.be.exactly(14);
+                    results[0].offset.should.be.exactly(3);
+                    results[0].type.should.be.exactly("sentence:uppercase");
+                    results[0].replacements.length.should.be.exactly(1);
+                    results[0].replacements[0].value.should.be.exactly('The');
                 });
             });
         });
