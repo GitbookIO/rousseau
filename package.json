@@ -1,5 +1,5 @@
 {
-    "name": "rousseau",
+    "name": "@azu/rousseau",
     "version": "1.0.4",
     "homepage": "https://github.com/GitbookIO/rousseau",
     "description": "Lightweight proofreader",

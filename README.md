@@ -8,14 +8,17 @@ Rousseau is a lightweight proofreader written in Javascript, it can be used in N
 
 ### Installation
 
+Fork version.
+For only one line change: https://github.com/GitbookIO/rousseau/pull/3
+
 ```
-$ npm install rousseau
+$ npm install @azu/rousseau
 ```
 
 ### API
 
 ```js
-var rousseau = require("rousseau");
+var rousseau = require("@azu/rousseau");
 
 rousseau('So the cat was stolen.', function(err, results) {
     ...
