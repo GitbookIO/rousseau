@@ -1,40 +1,43 @@
 {
-    "name": "@azu/rousseau",
-    "version": "1.0.4",
-    "homepage": "https://github.com/GitbookIO/rousseau",
-    "description": "Lightweight proofreader",
-    "main": "lib/index.js",
-    "dependencies": {
-        "lodash": "^3.2.0",
-        "bash-color": "0.0.3",
-        "cli-table": "0.3.1",
-        "crc": "3.2.1",
-        "simple-lru-cache": "0.0.1",
-        "tokenize-text": "1.1.3",
-        "tokenize-english": "1.0.3",
-        "tokenize-htmltext": "1.0.0",
-        "find-line-column": "0.5.2"
-    },
-    "devDependencies": {
-        "mocha": "2.3.3",
-        "should": "7.1.0"
-    },
-    "scripts": {
-        "test": "mocha --reporter spec --recursive --bail"
-    },
-    "bin": {
-        "rousseau": "./bin/rousseau.js"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/GitbookIO/rousseau.git"
-    },
-    "keywords": [
-        "proofreading", "language", "native", "spellcheck"
-    ],
-    "author": "GitBook <contact@gitbook.com>",
-    "license": "Apache-2.0",
-    "bugs": {
-        "url": "https://github.com/GitbookIO/rousseau/issues"
-    }
+  "name": "@azu/rousseau",
+  "version": "1.0.5",
+  "homepage": "https://github.com/GitbookIO/rousseau",
+  "description": "Lightweight proofreader",
+  "main": "lib/index.js",
+  "dependencies": {
+    "lodash": "^3.2.0",
+    "bash-color": "0.0.3",
+    "cli-table": "0.3.1",
+    "crc": "3.2.1",
+    "simple-lru-cache": "0.0.1",
+    "tokenize-text": "1.1.3",
+    "tokenize-english": "1.0.3",
+    "tokenize-htmltext": "1.0.0",
+    "find-line-column": "0.5.2"
+  },
+  "devDependencies": {
+    "mocha": "2.3.3",
+    "should": "7.1.0"
+  },
+  "scripts": {
+    "test": "mocha --reporter spec --recursive --bail"
+  },
+  "bin": {
+    "rousseau": "./bin/rousseau.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GitbookIO/rousseau.git"
+  },
+  "keywords": [
+    "proofreading",
+    "language",
+    "native",
+    "spellcheck"
+  ],
+  "author": "GitBook <contact@gitbook.com>",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/GitbookIO/rousseau/issues"
+  }
 }
