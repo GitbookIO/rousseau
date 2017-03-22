@@ -63,7 +63,7 @@ You can disable any combination of the following by providing a key with value `
 | `lexical-illusion` | Checks for lexical illusions – cases where a word is repeated. |
 | `so` | Checks for `so` at the beginning of the sentence. |
 | `adverbs` | Checks for adverbs that can weaken meaning: really, very, extremely, etc. |
-| `readibility` | Checks for readibility of sentences. |
+| `readability` | Checks for readability of sentences. |
 | `simplicity` | Checks for simpler expressions |
 | `weasel` | Checks for "weasel words." |
 | `sentence:start` | Checks that sentence is preceded by a space |
