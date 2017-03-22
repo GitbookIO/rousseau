@@ -76,14 +76,14 @@ describe("English", function() {
 
         it("should detect", function(done) {
             testRousseau(TEXT, {
-                only: ["readibility"]
+                only: ["readability"]
             }, done, function(results) {
                 results.should.have.length(2);
 
-                results[0].type.should.be.exactly("readibility");
+                results[0].type.should.be.exactly("readability");
                 results[0].level.should.be.exactly("suggestion");
 
-                results[1].type.should.be.exactly("readibility");
+                results[1].type.should.be.exactly("readability");
                 results[1].level.should.be.exactly("warning");
             });
         });
@@ -103,9 +103,9 @@ describe("English", function() {
             ];
 
             testRousseau(tokens, {
-                only: ["readibility"]
+                only: ["readability"]
             }, done, function(results) {
-                results[0].type.should.be.exactly("readibility");
+                results[0].type.should.be.exactly("readability");
                 results[0].index.should.equal(62);
                 results[0].offset.should.equal(158);
             });
